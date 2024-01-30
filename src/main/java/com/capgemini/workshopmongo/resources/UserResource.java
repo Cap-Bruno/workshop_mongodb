@@ -1,5 +1,6 @@
 package com.capgemini.workshopmongo.resources;
 
+import com.capgemini.workshopmongo.domain.Post;
 import com.capgemini.workshopmongo.domain.User;
 import com.capgemini.workshopmongo.dto.UserDTO;
 import com.capgemini.workshopmongo.service.UserService;
@@ -53,5 +54,10 @@ public class UserResource {
         user.setId(id);
         user = userService.updateUser(user);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 }
