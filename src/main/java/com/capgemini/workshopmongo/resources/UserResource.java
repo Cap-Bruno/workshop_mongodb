@@ -41,7 +41,10 @@ public class UserResource {
         user = userService.insertUser(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).build();
-
-
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String id){
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 }
