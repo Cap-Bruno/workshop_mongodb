@@ -1,10 +1,15 @@
 package com.capgemini.workshopmongo.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document
 public class User implements Serializable {
 
+    @Id
     public String id;
     public String name;
     public String email;
