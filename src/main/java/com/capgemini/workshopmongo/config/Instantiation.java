@@ -2,6 +2,7 @@ package com.capgemini.workshopmongo.config;
 
 import com.capgemini.workshopmongo.domain.Post;
 import com.capgemini.workshopmongo.domain.User;
+import com.capgemini.workshopmongo.dto.AuthorDTO;
 import com.capgemini.workshopmongo.repository.PostRepository;
 import com.capgemini.workshopmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,11 @@ public class Instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, simpleDF.parse("09/02/2024"), "Partiu viajem", "Vou viajar pra caragua.", bob);
-        Post post2 = new Post(null, simpleDF.parse("01/03/2024"), "Paraquedismo", "Dia de pular de paraquedas.", alex);
-
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+        Post post1 = new Post(null, simpleDF.parse("09/02/2024"), "Partiu viajem", "Vou viajar pra caragua.", new AuthorDTO(bob));
+        Post post2 = new Post(null, simpleDF.parse("01/03/2024"), "Paraquedismo", "Dia de pular de paraquedas.", new AuthorDTO(alex));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }
