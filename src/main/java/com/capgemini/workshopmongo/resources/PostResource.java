@@ -1,15 +1,14 @@
 package com.capgemini.workshopmongo.resources;
 
 import com.capgemini.workshopmongo.domain.Post;
-import com.capgemini.workshopmongo.dto.UserDTO;
+import com.capgemini.workshopmongo.resources.util.URL;
 import com.capgemini.workshopmongo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/posts")
@@ -23,4 +22,10 @@ public class PostResource {
         return ResponseEntity.ok().body(post);
     }
 
+    @GetMapping("/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text){
+        text = URL.decodeParam(text);
+        List<Post> list = postService.findByTitle(text);
+        return ResponseEntity.ok().body(list);
+    }
 }
